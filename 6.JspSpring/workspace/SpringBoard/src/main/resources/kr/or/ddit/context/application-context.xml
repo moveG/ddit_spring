@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- summernote ImagePath -->
+	<bean id="imgPath" class="java.lang.String">
+		<constructor-arg value="${summernote.img}"/>
+	</bean>
+	<!-- member Picture -->
+	<bean id="picturePath" class="java.lang.String">
+		<constructor-arg value="${member.picture.upload}"/>
+	</bean>
+	<!-- file Upload -->
+	<bean id="fileUploadPath" class="java.lang.String">
+		<constructor-arg value="${pds.upload}"/>
+	</bean>
+	
+	<bean id="loginUserLogSavePath" class="java.lang.String">
+		<constructor-arg value="${login.user.log}"/>
+	</bean>
+	
+	<bean id="loginUserLogSaveFileName" class="java.lang.String">
+		<constructor-arg value="login_user_log.csv"/>
+	</bean>
+	
+	<!-- repository -->
+	<bean id="memberDAO" class="com.jsp.dao.MemberDAOImpl"/>
+	<bean id="menuDAO" class="com.jsp.dao.MenuDAOImpl"/>
+	<bean id="noticeDAO" class="com.jsp.dao.NoticeDAOImpl"/>
+	<bean id="boardDAO" class="com.jsp.dao.BoardDAOImpl"/>
+	<bean id="replyDAO" class="com.jsp.dao.ReplyDAOImpl"/>
+	<bean id="pdsDAO" class="com.jsp.dao.PdsDAOImpl"/>
+	<bean id="attachDAO" class="com.jsp.dao.AttachDAOImpl"/>
+	
+	<!-- DAO -->
+	<bean id="memberDAOBean"
+		  class="kr.or.ddit.dao.spring.MemberDAOImplTemplate"
+		  p:session-ref="sqlSession"
+		  p:memberDAO-ref="memberDAO"/>
+	
+	<bean id="menuDAOBean"
+		  class="kr.or.ddit.dao.spring.MenuDAOImplTemplate"
+		  p:session-ref="sqlSession"
+		  p:menuDAO-ref="menuDAO"/>
+	
+	<bean id="noticeDAOBean"
+		  class="kr.or.ddit.dao.spring.NoticeDAOImplTemplate"
+		  p:session-ref="sqlSession"
+		  p:noticeDAO-ref="noticeDAO"/>
+	
+	<bean id="boardDAOBean"
+		  class="kr.or.ddit.dao.spring.BoardDAOImplTemplate"
+		  p:session-ref="sqlSession"
+		  p:boardDAO-ref="boardDAO"/>
+	
+	<bean id="replyDAOBean"
+		  class="kr.or.ddit.dao.spring.ReplyDAOImplTemplate"
+		  p:session-ref="sqlSession"
+		  p:replyDAO-ref="replyDAO"/>
+	
+	<bean id="pdsDAOBean"
+		  class="kr.or.ddit.dao.spring.PdsDAOImplTemplate"
+		  p:session-ref="sqlSession"
+		  p:pdsDAO-ref="pdsDAO"/>
+	
+	<bean id="attachDAOBean"
+		  class="kr.or.ddit.dao.spring.AttachDAOImplTemplate"
+		  p:session-ref="sqlSession"
+		  p:attachDAO-ref="attachDAO"/>
+	
+	<!-- service -->
+	<bean id="menuService"
+		  class="kr.or.ddit.service.spring.MenuServiceImpl"
+		  p:menuDAOBean-ref="menuDAOBean"
+	/>
+	
+	<bean id="memberService"
+		  class="kr.or.ddit.service.spring.MemberServiceImpl"
+		  p:memberDAOBean-ref="memberDAOBean"
+	/>
+	
+	<bean id="noticeService"
+		  class="kr.or.ddit.service.spring.NoticeServiceImpl"
+		  p:noticeDAOBean-ref="noticeDAOBean"
+	/>
+	
+	<bean id="boardService"
+		  class="kr.or.ddit.service.spring.BoardServiceImpl"
+		  p:boardDAOBean-ref="boardDAOBean"
+		  p:replyDAOBean-ref="replyDAOBean"
+	/>
+	
+	<bean id="pdsService"
+		  class="kr.or.ddit.service.spring.PdsServiceImpl"
+		  p:pdsDAOBean-ref="pdsDAOBean"
+		  p:attachDAOBean-ref="attachDAOBean"
+	/>
+	
+	<bean id="replyService"
+		  class="kr.or.ddit.service.spring.ReplyServiceImpl"
+		  p:replyDAOBean-ref="replyDAOBean"
+		  p:memberDAOBean-ref="memberDAOBean"
+	/>
+	
+	<bean id="scheduledMemberService"
+		  class="kr.or.ddit.service.spring.ScheduledMemberServiceImpl"
+		  p:memberDAOBean-ref="memberDAOBean"
+		  p:memberDAOBeanChild-ref="memberDAOBean"
+	/>
+	
+	<bean id="scheduledBoardService"
+		  class="kr.or.ddit.service.spring.ScheduledBoardServiceImpl"
+		  p:boardDAOBean-ref="boardDAOBean"
+		  p:boardDAOBeanChild-ref="boardDAOBean"
+		  p:replyDAOBean-ref="replyDAOBean"
+	/>
+	
+	<bean id="scheduledNoticeService"
+		  class="kr.or.ddit.service.spring.ScheduledNoticeServiceImpl"
+		  p:noticeDAOBean-ref="noticeDAOBean"
+		  p:noticeDAOBeanChild-ref="noticeDAOBean"
+	/>
+	
+	<bean id="scheduledPdsService"
+		  class="kr.or.ddit.service.spring.ScheduledPdsServiceImpl"
+		  p:pdsDAOBean-ref="pdsDAOBean"
+		  p:pdsDAOBeanChild-ref="pdsDAOBean"
+		  p:attachDAOBean-ref="attachDAOBean"
+	/>
+</beans>

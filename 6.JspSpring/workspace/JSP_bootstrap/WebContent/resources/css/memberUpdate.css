@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+#buttonbox{
+	float : right;
+}
+.item{
+	width : 200px;
+	vertical-align : middle;
+}
+.table th, .table td{
+	height : 49px;
+	vertical-align : middle;
+}
+.star{
+	color : red;
+}
+#address{
+	display : inline-block;
+	width : 337px;
+}
+.pic{
+	display : inline-block;
+	width : 132px;
+	height : 170px;
+}
+#piclabel{
+	vertical-align : bottom;
+	background : #28a745;
+	border-color : #28a745;
+	color : white;
+	width : 90px;
+	height : 38px;
+	padding : 7px 12px 5px 12px;
+	border-radius : 0.25rem;
+	font-weight : 400;
+	margin-bottom : 0px;
+}
+.btn-success{
+	vertical-align : top;
+}
+#piclabel:hover{
+	background : rgb(33, 136, 56);
+	border-color : rgb(33, 136, 56);
+}

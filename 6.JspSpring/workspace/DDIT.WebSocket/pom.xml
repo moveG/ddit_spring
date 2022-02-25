@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>kr.co.ddit</groupId>
+	<artifactId>DDIT.WebSocket</artifactId>
+	<packaging>war</packaging>
+	<version>1.0.0</version>
+	<name>DDIT.WebSocket</name>
+	<url>http://www.egovframe.go.kr</url>
+
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
+	</licenses>
+	<properties>
+		<spring.maven.artifact.version>4.3.22.RELEASE</spring.maven.artifact.version>
+		<egovframework.rte.version>3.9.0</egovframework.rte.version>
+	</properties>
+
+	<repositories>
+		<repository>
+			<id>public</id>
+			<url>https://nexus3.joa.familyds.com/repository/maven-public/</url>
+			<releases>
+				<!-- 정식 배포된 파일을 받아 옴. (정식 배포된 버젼으로 가지고옴) -->
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<!-- 테스트 및 배타 버젼을 (빌드 타임 스템프 정보로 받아 옴) -->
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+
+	</repositories>
+
+	<dependencies>
+		<!-- 전자정부 프레임워크 MVC 실행환경 라이브러리 -->
+		<dependency>
+			<groupId>egovframework.rte</groupId>
+			<artifactId>egovframework.rte.ptl.mvc</artifactId>
+			<version>${egovframework.rte.version}</version>
+		</dependency>
+		<!-- 전자정부 프레임워크 MVC 실행환경 라이브러리 끝 -->
+		
+		<!-- 전자정부 프레임워크 프로퍼티 환경 (다국어) 실행환경 라이브러리 -->
+		<dependency>
+			<groupId>egovframework.rte</groupId>
+			<artifactId>egovframework.rte.fdl.property</artifactId>
+			<version>${egovframework.rte.version}</version>
+		</dependency>
+		<!-- 전자정부 프레임워크 프로퍼티 환경 (다국어) 실행환경 라이브러리 끝 -->
+		
+		<!-- jackson 라이브러리 -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.5.1</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>2.5.1</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.5.1</version>
+		</dependency>
+		<!-- jackson 라이브러리  끝-->
+		
+		<!-- SQL쿼리 Logger 쿼리 완성본을 만들어서 로그로 출력 -->
+		<dependency>
+			<groupId>com.googlecode.log4jdbc</groupId>
+			<artifactId>log4jdbc</artifactId>
+			<version>1.2</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>slf4j-api</artifactId>
+					<groupId>org.slf4j</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- SQL쿼리 Logger 쿼리 완성본을 만들어서 로그로 출력 끝 -->
+		
+		<!-- 서블릿 -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>taglibs</groupId>
+			<artifactId>standard</artifactId>
+			<version>1.1.2</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- 서블릿 끝-->
+		
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.12.0</version>
+		</dependency>
+
+		<!-- WebSocket Messenger -->
+		<!-- 스프링 프레임워크에서 웹소켓 사용시 API -->
+		<dependency>
+			<groupId>javax.websocket</groupId>
+			<artifactId>javax.websocket-api</artifactId>
+			<version>1.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- 스프링 프레임워크에서 웹소켓 사용시 API 끝 -->
+		
+		<!-- websocket-api에서 사용하는 어노테이션 및 json 표준 프로토콜을 지원하는 java 1.5버전 ~ 11버전까지 지원 -->
+		<dependency>
+			<groupId>org.glassfish</groupId>
+			<artifactId>javax.json</artifactId>
+			<version>1.0.4</version>
+		</dependency>
+		<!-- websocket-api에서 사용하는 어노테이션 및 json 표준 프로토콜을 지원하는 java 1.5버전 ~ 11버전까지 지원 끝 -->
+		
+		<!-- byte데이터(문자)를 json데이터로 형변환 또는 Mapper하는 기능을 제공 -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.2</version>
+		</dependency>
+		<!-- byte데이터(문자)를 json데이터로 형변환 또는 Mapper하는 기능을 제공 끝 -->
+		
+		<!-- 공통컴포넌트 끝 -->
+	</dependencies>
+	<build>
+		<defaultGoal>install</defaultGoal>
+		<directory>${basedir}/target</directory>
+		<finalName>/WebSocket</finalName>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.tomcat.maven</groupId>
+					<artifactId>tomcat7-maven-plugin</artifactId>
+					<version>2.2</version>
+					<configuration>
+						<port>80</port>
+						<path>/</path>
+						<systemProperties>
+							<JAVA_OPTS>-Xms256m -Xmx768m -XX:MaxPermSize=256m</JAVA_OPTS>
+						</systemProperties>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<configuration>
+						<source>1.8</source>
+						<target>1.8</target>
+						<encoding>UTF-8</encoding>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>hibernate3-maven-plugin</artifactId>
+					<version>2.1</version>
+					<configuration>
+						<components>
+							<component>
+								<name>hbm2ddl</name>
+								<implementation>annotationconfiguration</implementation>
+							</component>
+						</components>
+					</configuration>
+					<dependencies>
+						<dependency>
+							<groupId>hsqldb</groupId>
+							<artifactId>hsqldb</artifactId>
+							<version>2.3.2</version>
+						</dependency>
+					</dependencies>
+				</plugin>
+				<!-- EMMA -->
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>emma-maven-plugin</artifactId>
+					<version>1.0-alpha-3</version>
+				</plugin>
+				<!-- PMD manven plugin -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-pmd-plugin</artifactId>
+					<version>3.1</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+			<!-- EMMA -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<skipTests>false</skipTests>
+					<forkMode>once</forkMode>
+					<reportFormat>xml</reportFormat>
+					<excludes>
+						<exclude>**/Abstract*.java</exclude>
+						<exclude>**/*Suite.java</exclude>
+					</excludes>
+					<includes>
+						<include>**/*Test.java</include>
+					</includes>
+				</configuration>
+			</plugin>
+			<!-- docker server 배포 <plugin> <groupId>org.apache.tomcat.maven</groupId> <artifactId>tomcat7-maven-plugin</artifactId> <version>2.2</version> <configuration> <url>http://192.168.100.251:8086/manager/text</url> <username>tomcat</username> <password>tomcat</password>
+				<path>/</path> <warFile>target\egovframework-all-in-one.war</warFile> <update>true</update> </configuration> </plugin> -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>emma-maven-plugin</artifactId>
+				<inherited>true</inherited>
+			</plugin>
+			<!-- JavaDoc -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.9.1</version>
+			</plugin>
+		</plugins>
+	</build>
+	<reporting>
+		<outputDirectory>${basedir}/target/site</outputDirectory>
+		<plugins>
+			<plugin>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>2.7</version>
+				<reportSets>
+					<reportSet>
+						<id>sunlink</id>
+						<reports>
+							<report>javadoc</report>
+						</reports>
+						<inherited>true</inherited>
+						<configuration>
+							<links>
+								<link>http://docs.oracle.com/javase/6/docs/api/</link>
+							</links>
+						</configuration>
+					</reportSet>
+				</reportSets>
+			</plugin>
+			<!-- JUnit Test Results & EMMA Coverage Reporting -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>emma-maven-plugin</artifactId>
+				<inherited>true</inherited>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>surefire-report-maven-plugin</artifactId>
+				<inherited>true</inherited>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>report-only</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+			<!-- Generating JavaDoc Report -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<configuration>
+					<minmemory>128m</minmemory>
+					<maxmemory>512m</maxmemory>
+					<encoding>${encoding}</encoding>
+					<docencoding>${encoding}</docencoding>
+					<charset>${encoding}</charset>
+				</configuration>
+			</plugin>
+			<!-- Generating Java Source in HTML -->
+			<plugin>
+				<artifactId>maven-jxr-plugin</artifactId>
+				<configuration>
+					<inputEncoding>${encoding}</inputEncoding>
+					<outputEncoding>${encoding}</outputEncoding>
+					<linkJavadoc>true</linkJavadoc>
+					<javadocDir>apidocs</javadocDir>
+				</configuration>
+			</plugin>
+		</plugins>
+	</reporting>
+</project>

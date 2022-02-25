@@ -1,0 +1,61 @@
+package kr.or.ddit.security;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import com.jsp.dto.MemberVO;
+
+public class User implements UserDetails {
+	
+	private MemberVO memberVO;
+	
+	public User(MemberVO memberVO) {
+		this.memberVO = memberVO;
+	}
+	
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		List<GrantedAuthority> roles = new ArrayList<GrantedAuthority>();
+		roles.add(new SimpleGrantedAuthority(memberVO.getAuthority()));
+		return roles;
+	}
+
+	@Override
+	public String getPassword() {
+		return memberVO.getPwd();
+	}
+
+	@Override
+	public String getUsername() {
+		return memberVO.getId();
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {		//기간제 계정의 경우 기간만료 여부 : enabled = 4
+		return memberVO.getEnabled() != 4;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {		//사용정지 또는 휴면계정 : enabled = 3
+		return memberVO.getEnabled() != 3;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {	//인증정보 만료여부 : enabled = 2
+		return memberVO.getEnabled() != 2;
+	}
+
+	@Override
+	public boolean isEnabled() {				//탈퇴 또는 삭제 : enabled = 0
+		return memberVO.getEnabled() != 0;
+	}
+	
+	public MemberVO getMeberVO() {
+		return this.memberVO;
+	}
+}

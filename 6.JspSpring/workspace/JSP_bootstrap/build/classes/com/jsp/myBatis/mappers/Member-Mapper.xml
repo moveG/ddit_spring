@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Member-Mapper">
+	<select id="idCheck" parameterType="str" resultType="int">
+		SELECT COUNT(*)
+		  FROM MEMBER
+		 WHERE ID = #{id}
+	</select>
+	
+	<select id="countMember" parameterType="pagingVO" resultType="int">
+		SELECT COUNT(*)
+		  FROM MEMBER
+		 WHERE 1 = 1
+		<if test='searchKey.equals("id")'>
+			AND ID LIKE '%' || #{searchWord} || '%'
+		</if>
+		<if test='searchKey.equals("name")'>
+			AND NAME LIKE '%' || #{searchWord} || '%'
+		</if>
+		<if test='searchKey.equals("phone")'>
+			AND PHONE LIKE '%' || #{searchWord} || '%'
+		</if>
+		<if test='searchKey.equals("email")'>
+			AND EMAIL LIKE '%' || #{searchWord} || '%'
+		</if>
+		 ORDER BY REGDATE DESC
+	</select>
+	
+	<update id="updateMember" parameterType="memberVO">
+		UPDATE MEMBER
+		   SET PWD = #{pwd},
+		   	   EMAIL = #{email},
+		   	   PICTURE = #{picture},
+		   	   ENABLED = #{enabled},
+		   	   PHONE = #{phone},
+		   	   REGDATE = #{regdate},
+		   	   ADDRESS = #{address},
+		   	   AUTHORITY = #{authority},
+		   	   REGISTER = #{register}
+		 WHERE ID = #{id}
+	</update>
+	
+	<update id="insertMember" parameterType="memberVO">
+		INSERT INTO MEMBER (ID, PWD, EMAIL, PICTURE, REGDATE, PHONE, NAME, ADDRESS, REGISTER)
+		VALUES(#{id}, #{pwd}, #{email}, #{picture}, #{regdate}, #{phone}, #{name}, #{address}, #{register})
+	</update>
+	
+	<delete id="deleteMember" parameterType="str">
+		DELETE MEMBER
+		 WHERE ID = #{id}
+	</delete>
+	
+	<select id="listMember" parameterType="pagingVO" resultType="memberVO">
+		SELECT AA.*
+		  FROM (SELECT ROWNUM AS rnum,
+		  			   A.*
+		  		  FROM (SELECT *
+		  		  		  FROM MEMBER
+		  		  		  WHERE 1 = 1
+						<if test='searchKey.equals("id")'>
+							AND ID LIKE '%' || #{searchWord} || '%'
+						</if>
+						<if test='searchKey.equals("name")'>
+							AND NAME LIKE '%' || #{searchWord} || '%'
+						</if>
+						<if test='searchKey.equals("phone")'>
+							AND PHONE LIKE '%' || #{searchWord} || '%'
+						</if>
+						<if test='searchKey.equals("email")'>
+							AND EMAIL LIKE '%' || #{searchWord} || '%'
+						</if>
+						  ORDER BY REGDATE DESC) A) AA
+		 WHERE AA.rnum BETWEEN #{firstRecNo} AND #{lastRecNo}
+	</select>
+	
+	<select id="detailMember" parameterType="String" resultType="memberVO">
+		SELECT *
+		  FROM MEMBER
+		 WHERE ID = #{id}
+	</select>
+</mapper>

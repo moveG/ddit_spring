@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+.container{
+	margin-left : 30%;
+	padding-top : 16px;
+}
+.form-control, .custom-file-label{
+	width : 500px;
+	display : inline-block;
+}
+.star{
+	color : red;
+}
+.form-group{
+	height : 70px;
+}
+.btn-primary{
+	background : rgb(13, 110, 253);
+	border-color : rgb(13, 110, 253);
+}
+.btn-success{
+	vertical-align : top;
+	background : rgb(25, 135, 84);
+	border-color : rgb(25, 135, 84);
+}
+.btn-success:hover{
+	background : rgb(21, 115, 71);
+	border-color : rgb(21, 115, 71);
+}

@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+.container{
+	width : 1000px;
+}
+#searchbox{
+	width : 450px;
+	float : right;
+}
+.id{
+	width : 220px;
+}
+.name{
+	width : 210px;
+}
+.email{
+	width : 300px;
+}
+.tel{
+	width : 180px;
+}
+.state{
+	width : 60px;
+}

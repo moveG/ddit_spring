@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+.container{
+		margin-left : 32%;
+		width : 700px;
+	}
+#buttonbox{
+	float : right;
+}
+.item{
+	width : 200px;
+	vertical-align : middle;
+}
+.container th, .container td{
+	height : 55px;
+	vertical-align : middle;
+}
+.pic{
+	display : inline-block;
+	width : 132px;
+	height : 170px; 
+}

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Member-Mapper">
+	<select id="selectMemberList" resultType="memberVO">
+		SELECT *
+		  FROM MEMBER
+		 ORDER BY REGDATE DESC
+	</select>
+	
+	<select id="selectMemberListCount" resultType="int">
+		SELECT COUNT(*)
+		  FROM MEMBER
+	</select>
+	
+	<sql id="search">
+		<if test="searchType == 'i'.toString()">
+		   AND ID LIKE '%' || #{searchWord} || '%'
+		</if>
+		<if test="searchType == 'n'.toString()">
+		   AND NAME LIKE '%' || #{searchWord} || '%'
+		</if>
+		<if test="searchType == 'e'.toString()">
+		   AND EMAIL LIKE '%' || #{searchWord} || '%'
+		</if>
+		<if test="searchType == 'p'.toString()">
+		   AND PHONE LIKE '%' || #{searchWord} || '%'
+		</if>
+	</sql>
+	
+	<select id="selectSearchMemberList" resultType="memberVO">
+		SELECT *
+		  FROM MEMBER
+		 WHERE ID IS NOT NULL
+		 <include refid="search"/>
+		 ORDER BY regDate DESC
+	</select>
+	
+	<select id="selectSearchMemberListCount" resultType="int">
+		SELECT COUNT(*)
+		  FROM MEMBER
+		 WHERE ID IS NOT NULL
+		 <include refid="search"/>
+	</select>
+
+	<select id="selectMemberById" parameterType="str" resultType="memberVO">
+		SELECT *
+		  FROM MEMBER
+		 WHERE ID = #{id}
+	</select>
+
+	<select id="selectMemberByPicture" resultType="memberVO">
+		SELECT *
+		  FROM MEMBER
+		 WHERE PICTURE = #{picture}
+	</select>
+	
+	<update id="insertMember" parameterType="memberVO">
+		INSERT INTO MEMBER ( ID
+						   , PWD
+						   , EMAIL
+						   , PHONE
+						   , PICTURE
+						   , NAME
+						   , ADDRESS
+						   , AUTHORITY
+						   )
+				    VALUES ( #{id}
+						   , #{pwd}
+						   , #{email}
+						   , #{phone}
+						   , #{picture}
+						   , #{name}
+						   , #{address}
+						   , #{authority}
+						   )
+	</update>
+	
+	<update id="deleteMember" parameterType="str">
+		DELETE 
+		  FROM MEMBER
+		 WHERE ID = #{id}
+	</update>
+	
+	<update id="updateMember" parameterType="memberVO">
+		UPDATE MEMBER
+		   SET PWD       = #{pwd}
+		     , EMAIL     = #{email}
+		     , PHONE     = #{phone}
+		     , NAME      = #{name}
+		     , PICTURE   = #{picture}
+		   	 , ENABLED   = #{enabled}
+		   	 , ADDRESS   = #{address}
+		   	 <if test="authority != null">
+		   	 , AUTHORITY = #{authority}
+		   	 </if>
+		 WHERE ID        = #{id}
+	</update>
+	
+	<update id="enabledMember">
+		UPDATE MEMBER
+		   SET ENABLED = #{enabled}
+		 WHERE ID      = #{id}
+	</update>
+</mapper>

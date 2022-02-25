@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Notice-Mapper">
+	<sql id="search">
+		<if test="searchType == 'title'.toString()">
+		   AND TITLE LIKE '%' || #{searchWord} || '%'
+		</if>
+		<if test="searchType == 'content'.toString()">
+		   AND CONTENT LIKE '%' || #{searchWord} || '%'
+		</if>
+		<if test="searchType == 'writer'.toString()">
+		   AND WRITER LIKE '%' || #{searchWord} || '%'
+		</if>
+		<if test="searchType == 'titleAndContent'.toString()">
+		   AND (TITLE LIKE '%' || #{searchWord} || '%' OR CONTENT LIKE '%' || #{searchWord} || '%')
+		</if>
+		<if test="searchType == 'titleAndWriter'.toString()">
+		   AND (TITLE LIKE '%' || #{searchWord} || '%' OR WRITER LIKE '%' || #{searchWord} || '%')
+		</if>
+		<if test="searchType == 'titleAndContentAndWriter'.toString()">
+		   AND (TITLE LIKE '%' || #{searchWord} || '%' OR CONTENT LIKE '%' || #{searchWord} || '%' OR WRITER LIKE '%' || #{searchWord} || '%')
+		</if>
+	</sql>
+	
+	<select id="selectSearchNoticeList" resultType="noticeVO">
+		SELECT *
+		  FROM NOTICE
+		 WHERE NNO IS NOT NULL
+		   AND (ENDDATE IS NULL OR ENDDATE <![CDATA[>]]> SYSDATE)
+		 <include refid="search"/>
+		 ORDER BY NNO DESC
+	</select>
+	
+	<select id="selectSearchNoticeListCount" resultType="int">
+		SELECT COUNT(*)
+		  FROM NOTICE
+		 WHERE NNO IS NOT NULL
+		   AND (ENDDATE IS NULL OR ENDDATE <![CDATA[>]]> SYSDATE)
+		 <include refid="search"/>
+	</select>
+	
+	<select id="selectPointNoticeList" resultType="noticeVO">
+		SELECT *
+		  FROM (SELECT *
+				  FROM NOTICE
+				 WHERE POINT = 1
+				   AND (ENDDATE IS NULL OR ENDDATE <![CDATA[>]]> SYSDATE)
+				 ORDER BY REGDATE DESC)
+		 WHERE ROWNUM <![CDATA[<]]> 4
+	</select>
+	
+	<select id="selectNoticeByNno" parameterType="int" resultType="noticeVO">
+		SELECT *
+		  FROM NOTICE
+		 WHERE NNO = #{nNo}
+	</select>
+	
+	<select id="selectNoticeWriter" resultType="str">
+		SELECT ID
+		  FROM MEMBER
+		 ORDER BY ID
+	</select>
+	
+	<update id="deleteNotice" parameterType="int">
+		DELETE NOTICE
+		 WHERE NNO = #{nNo}
+	</update>
+	
+	<update id="updateNotice" parameterType="noticeVO">
+		UPDATE NOTICE
+		   SET TITLE      = #{title}
+			 , CONTENT    = #{content}
+			 , POINT      = #{point}
+			 , STARTDATE  = #{startDate}
+			<if test="endDate != null">
+			 , ENDDATE    = #{endDate}
+			</if>
+			<if test="endDate == null">
+			 , ENDDATE    = null
+			</if>
+			 , UPDATEDATE = SYSDATE
+		 WHERE NNO        = #{nNo}
+	</update>
+	
+	<update id="insertNotice" parameterType="noticeVO">
+		INSERT INTO NOTICE ( NNO
+						   , TITLE
+						   , WRITER
+						   , CONTENT
+						   , VIEWCNT
+						   , POINT
+						   , STARTDATE
+						   , ENDDATE
+				  ) VALUES ( NOTICE_SEQ.NEXTVAL
+						   , #{title}
+						   , #{writer}
+						   , #{content}
+						   , 1
+						   , #{point}
+						   , #{startDate}
+						<if test="endDate != null">
+						   , #{endDate}
+						</if>
+						<if test="endDate == null">
+						   , null
+						</if>
+						   )
+	</update>
+	
+	<update id="plusViews">
+		UPDATE NOTICE
+		   SET VIEWCNT = VIEWCNT + 1
+		 WHERE NNO = #{nNo}
+	</update>
+</mapper>

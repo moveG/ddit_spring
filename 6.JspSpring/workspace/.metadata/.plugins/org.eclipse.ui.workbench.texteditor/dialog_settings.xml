@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.GotoLineAction$GotoLineDialog_dialogBounds">
+		<item value="729" key="DIALOG_X_ORIGIN"/>
+		<item value="403" key="DIALOG_Y_ORIGIN"/>
+	</section>
+	<section name="org.eclipse.jst.jsp.ui.internal.preferences.ui.JSPTemplatePreferencePage$JSPEditTemplateDialog_dialogBounds">
+		<item value="612" key="DIALOG_WIDTH"/>
+		<item value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕" key="DIALOG_FONT_NAME"/>
+		<item value="436" key="DIALOG_HEIGHT"/>
+		<item value="235" key="DIALOG_X_ORIGIN"/>
+		<item value="52" key="DIALOG_Y_ORIGIN"/>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item value="false" key="isRegEx"/>
+		<item value="" key="selection"/>
+		<item value="true" key="casesensitive"/>
+		<item value="false" key="incremental"/>
+		<item value="true" key="wrap"/>
+		<item value="false" key="wholeword"/>
+		<list key="findhistory">
+			<item value="dataSourceSpied"/>
+			<item value="replyModifyModal"/>
+			<item value="getAttachByAno"/>
+			<item value="rttr"/>
+			<item value="getPicture"/>
+			<item value="uploadFile"/>
+			<item value="target-ano"/>
+			<item value="attached"/>
+			<item value="removeFile_go"/>
+			<item value="remove_file"/>
+			<item value="remove"/>
+			<item value="deleteFile"/>
+			<item value="attach"/>
+			<item value="reply-list-template"/>
+			<item value="printData"/>
+		</list>
+		<list key="replacehistory">
+			<item value=""/>
+			<item value="com.jsp.dao."/>
+			<item value="kr.or.ddit.dto."/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item value="288" key="DIALOG_WIDTH"/>
+		<item value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕" key="DIALOG_FONT_NAME"/>
+		<item value="391" key="DIALOG_HEIGHT"/>
+		<item value="1332" key="DIALOG_X_ORIGIN"/>
+		<item value="221" key="DIALOG_Y_ORIGIN"/>
+	</section>
+</section>

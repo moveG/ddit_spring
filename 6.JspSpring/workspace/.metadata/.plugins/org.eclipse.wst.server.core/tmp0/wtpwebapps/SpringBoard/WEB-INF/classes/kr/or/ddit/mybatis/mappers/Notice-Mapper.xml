@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Notice-Mapper">
+	<sql id="search">
+		<if test="searchType == 't'.toString()">
+			AND TITLE LIKE '%' || #{searchWord} || '%'
+		</if>
+		<if test="searchType == 'c'.toString()">
+			AND CONTENT LIKE '%' || #{searchWord} || '%'
+		</if>
+		<if test="searchType == 'w'.toString()">
+			AND WRITER LIKE '%' || #{searchWord} || '%'
+		</if>
+		<if test="searchType == 'tc'.toString()">
+			AND (
+				 TITLE LIKE '%' || #{searchWord} || '%' 
+			     OR
+			     CONTENT LIKE '%' || #{searchWord} || '%'
+			    )
+		</if>
+		<if test="searchType == 'cw'.toString()">
+			AND (
+				 WRITER LIKE '%' || #{searchWord} || '%'
+				 OR
+				 CONTENT LIKE '%' || #{searchWord} || '%'
+				)
+		</if>
+		<if test="searchType == 'tcw'.toString()">
+			AND (
+				 TITLE LIKE '%' || #{searchWord} || '%'
+				 OR
+				 CONTENT LIKE '%' || #{searchWord} || '%'
+				 OR
+				 WRITER LIKE '%' || #{searchWord} || '%'
+				)
+		</if>
+	</sql>
+	
+	<select id="selectSearchNoticeList" resultType="noticeVO">
+		SELECT *
+		  FROM NOTICE
+		 WHERE NNO IS NOT NULL
+		   AND (ENDDATE IS NULL OR ENDDATE <![CDATA[>]]> SYSDATE)
+		 <include refid="search"/>
+		 ORDER BY NNO DESC
+	</select>
+	
+	<select id="selectSearchNoticeListCount" resultType="int">
+		SELECT COUNT(*)
+		  FROM NOTICE
+		 WHERE NNO IS NOT NULL
+		   AND (ENDDATE IS NULL OR ENDDATE <![CDATA[>]]> SYSDATE)
+		 <include refid="search"/>
+	</select>
+
+	<select id="selectPointNoticeList" resultType="noticeVO">
+		SELECT *
+		  FROM (SELECT *
+				  FROM NOTICE
+				 WHERE POINT = 1
+				   AND (ENDDATE IS NULL OR ENDDATE <![CDATA[>]]> SYSDATE)
+				 ORDER BY REGDATE DESC)
+		 WHERE ROWNUM <![CDATA[<]]> 4
+	</select>
+	
+	<select id="selectNoticeByNno" parameterType="int" resultType="noticeVO">
+		SELECT *
+		  FROM NOTICE
+		 WHERE NNO = #{nno}
+	</select>
+
+	<select id="selectNoticeByImage" resultType="noticeVO">
+		SELECT *
+		  FROM NOTICE
+		 WHERE CONTENT LIKE '%' || #{imageFile} || '%'
+	</select>
+
+	<select id="selectNoticeSequenceNextValue" resultType="int">
+		SELECT NOTICE_SEQ.NEXTVAL
+		  FROM DUAL
+	</select>
+
+	<update id="increaseViewCount" parameterType="int">
+		UPDATE NOTICE
+		   SET VIEWCNT = VIEWCNT + 1
+		 WHERE NNO = #{nno}
+	</update>
+
+	<update id="insertNotice" parameterType="noticeVO">
+		INSERT INTO NOTICE ( NNO
+						   , TITLE
+						   , WRITER
+						   , CONTENT
+						   , VIEWCNT
+						   , POINT
+						   , STARTDATE
+						   , ENDDATE
+				  ) VALUES ( #{nno}
+						   , #{title}
+						   , #{writer}
+						   , #{content}
+						   , 1
+						   , #{point}
+						   , #{startDate}
+						<if test="endDate != null">
+						   , #{endDate}
+						</if>
+						<if test="endDate == null">
+						   , null
+						</if>
+						   )
+	</update>
+	
+		
+	<update id="updateNotice" parameterType="noticeVO">
+		UPDATE NOTICE
+		   SET TITLE      = #{title}
+			 , CONTENT    = #{content}
+			 , POINT      = #{point}
+			 , STARTDATE  = #{startDate}
+			<if test="endDate != null">
+			 , ENDDATE    = #{endDate}
+			</if>
+			<if test="endDate == null">
+			 , ENDDATE    = null
+			</if>
+			 , UPDATEDATE = SYSDATE
+		 WHERE NNO        = #{nno}
+	</update>
+	
+	<update id="deleteNotice" parameterType="int">
+		DELETE 
+		  FROM NOTICE
+		 WHERE NNO = #{nno}
+	</update>
+</mapper>

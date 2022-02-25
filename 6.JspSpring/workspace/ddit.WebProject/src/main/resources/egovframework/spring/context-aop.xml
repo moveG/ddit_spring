@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+
+	<!-- <bean id="아이디 부여"
+			   class="실행할 클래스 명 작성" />
+
+	<aop:config>
+		<aop:aspect id="어떤 행위를 할 것인지 명시" ref="아이디 부여">
+			<aop:around pointcut="execution(public * 패키지 정의.*Impl.어떤 메소드를 잡을 것인지 명시*(..))"
+						method="해당 조건에 실행될 메소드 명" />
+		</aop:aspect>
+	</aop:config> -->
+
+	<bean id="exampleAop"
+		  class="egovframework.example.cmmn.aop.ExampleAop"/>
+	
+	<aop:config>
+		<aop:aspect id="exampleSelect" ref="exampleAop">
+			<aop:around pointcut="execution(public * egovframework.example..*Impl.select*(..))"
+						method="selectProc"/>
+		</aop:aspect>
+	</aop:config>
+
+</beans>

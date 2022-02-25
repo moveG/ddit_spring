@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Pds-Mapper">
+	<sql id="search">
+		<if test="searchType == 't'.toString()">
+			AND TITLE LIKE '%' || #{searchWord} || '%'
+		</if>
+		<if test="searchType == 'c'.toString()">
+			AND CONTENT LIKE '%' || #{searchWord} || '%'
+		</if>
+		<if test="searchType == 'w'.toString()">
+			AND WRITER LIKE '%' || #{searchWord} || '%'
+		</if>
+		<if test="searchType == 'tc'.toString()">
+			AND (
+				 TITLE LIKE '%' || #{searchWord} || '%' 
+			     OR
+			     CONTENT LIKE '%' || #{searchWord} || '%'
+			    )
+		</if>
+		<if test="searchType == 'cw'.toString()">
+			AND (
+				 WRITER LIKE '%' || #{searchWord} || '%'
+				 OR
+				 CONTENT LIKE '%' || #{searchWord} || '%'
+				)
+		</if>
+		<if test="searchType == 'tcw'.toString()">
+			AND (
+				 TITLE LIKE '%' || #{searchWord} || '%'
+				 OR
+				 CONTENT LIKE '%' || #{searchWord} || '%'
+				 OR
+				 WRITER LIKE '%' || #{searchWord} || '%'
+				)
+		</if>
+	</sql>
+	
+	<select id="selectSearchPdsList" resultType="pdsVO">
+		SELECT *
+		  FROM PDS
+		 WHERE PNO IS NOT NULL	  	
+		<include refid="search"/>
+		 ORDER BY PNO DESC
+	</select>
+	
+	<select id="selectSearchPdsListCount" resultType="int">
+		SELECT COUNT(*)
+		  FROM PDS
+		 WHERE PNO IS NOT NULL 			  	
+		<include refid="search"/>
+	</select>
+	
+	<select id="selectPdsByPno" resultType="pdsVO">
+		SELECT *
+		  FROM PDS
+		 WHERE PNO = #{pno}
+	</select>
+
+	<select id="selectPdsByImage" resultType="pdsVO">
+		SELECT *
+		  FROM PDS
+		 WHERE CONTENT LIKE '%' || #{imageFile} || '%'
+	</select>
+	
+	<update id="increaseViewCount" parameterType="int">
+		UPDATE PDS
+		   SET VIEWCNT = VIEWCNT + 1
+		 WHERE PNO = #{pno}
+	</update>
+	
+	<select id="selectPdsSequenceNextValue" resultType="int">
+		SELECT PDS_SEQ.NEXTVAL AS pno
+		  FROM DUAL
+	</select>
+	
+	<update id="insertPds" parameterType="pdsVO">
+		INSERT INTO PDS ( PNO
+						, TITLE
+						, WRITER
+						, CONTENT
+			   ) VALUES ( #{pno}
+					    , #{title}
+					    , #{writer}
+					    , #{content}
+						)
+	</update>
+	
+	<update id="updatePds" parameterType="pdsVO">
+		UPDATE PDS
+		   SET TITLE      = #{title}
+			 , CONTENT    = #{content}
+			 , UPDATEDATE = SYSDATE 
+		 WHERE PNO        = #{pno}
+	</update>
+	
+	<update id="deletePds" parameterType="int">
+		DELETE
+		  FROM PDS
+		 WHERE PNO = #{pno}
+	</update>
+</mapper>

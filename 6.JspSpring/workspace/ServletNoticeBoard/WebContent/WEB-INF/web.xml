@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+  <filter>
+    <filter-name>Set Character Encoding</filter-name>
+    <filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>Set Character Encoding</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <filter>
+    <filter-name>sitemesh</filter-name>
+    <filter-class>com.opensymphony.sitemesh.webapp.SiteMeshFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>sitemesh</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <servlet>
+    <servlet-name>NoticeListServlet</servlet-name>
+    <servlet-class>com.jsp.controller.NoticeListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NoticeListServlet</servlet-name>
+    <url-pattern>/notice/list</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>NoticeDetailServlet</servlet-name>
+    <servlet-class>com.jsp.controller.NoticeDetailServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NoticeDetailServlet</servlet-name>
+    <url-pattern>/notice/detail</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>NoticeRemoveServlet</servlet-name>
+    <servlet-class>com.jsp.controller.NoticeRemoveServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NoticeRemoveServlet</servlet-name>
+    <url-pattern>/notice/remove</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>NoticeModifyServlet</servlet-name>
+    <servlet-class>com.jsp.controller.NoticeModifyServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NoticeModifyServlet</servlet-name>
+    <url-pattern>/notice/modify</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>NoticeRegistServlet</servlet-name>
+    <servlet-class>com.jsp.controller.NoticeRegistServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NoticeRegistServlet</servlet-name>
+    <url-pattern>/notice/regist</url-pattern>
+  </servlet-mapping>
+</web-app>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Attach-Mapper">
+	<select id="selectAttachByPno" resultType="attachVO">
+		SELECT *
+		  FROM ATTACH
+		 WHERE PNO = #{pno}
+	</select>	
+	
+	<select id="selectAttachByAno" resultType="attachVO">
+		SELECT *
+		  FROM ATTACH
+		 WHERE ANO = #{ano}
+	</select>
+	
+	<update id="insertAttach" parameterType="attachVO">
+		INSERT INTO ATTACH ( ANO
+						   , UPLOADPATH
+						   , FILENAME
+						   , FILETYPE
+						   , PNO
+						   , ATTACHER
+				  ) VALUES ( ATTACH_SEQ.NEXTVAL
+						   , #{uploadPath}
+						   , #{fileName}
+						   , #{fileType}
+						   , #{pno}
+						   , #{attacher}
+						   )
+	</update>
+	
+	<update id="deleteAttach" parameterType="int">
+		DELETE
+		  FROM ATTACH
+		 WHERE ANO = #{ano}
+	</update>
+	
+	<update id="deleteAllAttach" parameterType="int">
+		DELETE
+		  FROM ATTACH
+		 WHERE PNO = #{pno}
+	</update>
+</mapper>

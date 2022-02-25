@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<typeInfoHistroy>
+<typeInfo handle="=spring_aop/src\/main\/java&lt;com.spring.aspects{Behavior.java[Behavior" modifiers="513" timestamp="1640230315030"/>
+<typeInfo handle="=spring_bootstrap/C:\/Users\/PC-15\/.m2\/repository\/org\/springframework\/security\/spring-security-core\/3.2.3.RELEASE\/spring-security-core-3.2.3.RELEASE.jar&lt;org.springframework.security.core.userdetails(UserDetails.class[UserDetails" modifiers="1537" timestamp="1640308342409"/>
+<typeInfo handle="=spring_bootstrap/src\/main\/java&lt;kr.or.ddit.dao.spring{MemberDAOBean.java[MemberDAOBean" modifiers="513" timestamp="1639621575653"/>
+<typeInfo handle="=spring_bootstrap/D:\/A_TeachingMaterial\/6.JspSpring\/workspace\/spring_bootstrap\/src\/main\/webapp\/WEB-INF\/lib\/command_bootstrap1.1.jar&lt;com.jsp.dao(MemberDAOImpl.class[MemberDAOImpl" modifiers="33" timestamp="1639635551549"/>
+<typeInfo handle="=spring_bootstrap/src\/main\/java&lt;kr.or.ddit.dao.spring{MemberDAOImplTemplate.java[MemberDAOImplTemplate" modifiers="1" timestamp="1639650250704"/>
+<typeInfo handle="=spring_bootstrap/src\/main\/java&lt;kr.or.ddit.dao.spring{ScheduledMemberDAOBean.java[ScheduledMemberDAOBean" modifiers="513" timestamp="1640829957586"/>
+<typeInfo handle="=spring_bootstrap/D:\/A_TeachingMaterial\/6.JspSpring\/workspace\/spring_bootstrap\/src\/main\/webapp\/WEB-INF\/lib\/command_bootstrap1.1.jar&lt;com.jsp.service(MemberServiceForModify.class[MemberServiceForModify" modifiers="1537" timestamp="1639635551549"/>
+<typeInfo handle="=spring_bootstrap/D:\/A_TeachingMaterial\/6.JspSpring\/workspace\/spring_bootstrap\/src\/main\/webapp\/WEB-INF\/lib\/command_bootstrap1.1.jar&lt;com.jsp.service(MemberServiceForModifyImpl.class[MemberServiceForModifyImpl" modifiers="33" timestamp="1639635551549"/>
+<typeInfo handle="=spring_bootstrap/D:\/A_TeachingMaterial\/6.JspSpring\/workspace\/spring_bootstrap\/src\/main\/webapp\/WEB-INF\/lib\/command_bootstrap1.1.jar&lt;com.jsp.service(BoardService.class[BoardService" modifiers="1537" timestamp="1639635551549"/>
+<typeInfo handle="=spring_bootstrap/src\/main\/java&lt;kr.or.ddit.service.spring{BoardServiceImpl.java[BoardServiceImpl" modifiers="1" timestamp="1639626418902"/>
+<typeInfo handle="=spring_bootstrap/src\/main\/java&lt;kr.or.ddit.service.spring{ScheduledMemberServiceForModify.java[ScheduledMemberServiceForModify" modifiers="513" timestamp="1640830690977"/>
+<typeInfo handle="=ddit.WebProject/C:\/Users\/PC-15\/.m2\/repository\/org\/springframework\/spring-webmvc\/4.3.22.RELEASE\/spring-webmvc-4.3.22.RELEASE.jar&lt;org.springframework.web.servlet.handler(HandlerInterceptorAdapter.class[HandlerInterceptorAdapter" modifiers="1057" timestamp="1641014241303"/>
+</typeInfoHistroy>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+	<servlet>
+		<servlet-name>MemberList</servlet-name>
+		<servlet-class>com.jsp.controller.MemberList</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MemberList</servlet-name>
+		<url-pattern>/MemberList.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>MemberDetail</servlet-name>
+		<servlet-class>com.jsp.controller.MemberDetail</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MemberDetail</servlet-name>
+		<url-pattern>/MemberDetail.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>MemberUpdate</servlet-name>
+		<servlet-class>com.jsp.controller.MemberUpdate</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MemberUpdate</servlet-name>
+		<url-pattern>/MemberUpdate.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>MemberDelete</servlet-name>
+		<servlet-class>com.jsp.controller.MemberDelete</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MemberDelete</servlet-name>
+		<url-pattern>/MemberDelete.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>MemberInsert</servlet-name>
+		<servlet-class>com.jsp.controller.MemberInsert</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MemberInsert</servlet-name>
+		<url-pattern>/MemberInsert.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>IDCheck</servlet-name>
+		<servlet-class>com.jsp.controller.IDCheck</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>IDCheck</servlet-name>
+		<url-pattern>/IDCheck.do</url-pattern>
+	</servlet-mapping>
+	
+	<filter>
+		<filter-name>CustomCharacterEncoding</filter-name>
+		<filter-class>com.jsp.util.CustomCharacterEncoding</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>CustomCharacterEncoding</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>sitemesh</filter-name>
+		<filter-class>com.opensymphony.sitemesh.webapp.SiteMeshFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>sitemesh</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+</web-app>

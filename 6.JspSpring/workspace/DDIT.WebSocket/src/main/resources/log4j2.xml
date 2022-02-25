@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d %5p [%c] %m%n" />
+        </Console>
+    </Appenders>
+    <Loggers>
+    	<!-- 필수 : sql쿼리 실행 결과 -->
+        <Logger name="java.sql" level="INFO" additivity="false">
+            <AppenderRef ref="console" />
+        </Logger>
+        
+        <!-- 필수 : sql쿼리 실행 결과 -->
+		<!-- log SQL with timing information, post execution -->
+	    <Logger name="jdbc.sqltiming" level="INFO" additivity="false">
+	        <AppenderRef ref="console" />
+	    </Logger>
+	    
+	    <!-- 옵션 : 스프링 프레임워크에서 처리되는 로그 -->
+	    <Logger name="org.springframework" level="INFO" additivity="false">
+	        <AppenderRef ref="console" />
+	    </Logger>
+	    
+        <!-- 필수 : 전자정부 프레임워크 사용시 필수 -->
+        <!-- 전자정부에서 처리되는 로그 정보를 출력 -->
+        <Logger name="egovframework" level="DEBUG" additivity="false">
+            <AppenderRef ref="console" />
+        </Logger>
+        
+        <!-- 옵션  : 커스텀 설정, 내가 개발하고 있는 패키지 경로 정보를 입력하여 내가 담당하는 부분만 볼 경우 추가 -->
+		<Logger name="egovframework.example.sample.web" level="DEBUG" additivity="false">
+	        <AppenderRef ref="console" />
+	    </Logger>
+        
+        <Root level="ERROR">
+            <AppenderRef ref="console" />
+        </Root>
+    </Loggers>
+</Configuration>

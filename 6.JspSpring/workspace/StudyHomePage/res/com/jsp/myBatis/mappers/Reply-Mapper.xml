@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Reply-Mapper">
+	<select id="selectReplySequenceNextValue" resultType="int" >
+		SELECT REPLY_SEQ.NEXTVAL
+		  FROM DUAL		
+	</select>
+	
+	<select id="selectReplyList" resultType="replyVO">
+		SELECT *
+		  FROM REPLY
+		 WHERE BNO = #{bno}
+		 ORDER BY RNO ASC
+	</select>
+	
+	<select id="selectReplyListCount" resultType="int">
+		SELECT COUNT(BNO) 
+		  FROM REPLY
+		 WHERE BNO = #{bno}
+	</select>
+	
+	<update id="insertReply" parameterType="replyVO">
+		INSERT INTO REPLY ( RNO
+						  , BNO
+						  , REPLYTEXT
+						  , REPLYER
+				 ) VALUES ( #{rno}
+				 		  , #{bno}
+				 		  , #{replyText}
+				 		  , #{replyer}
+				 		  )
+	</update>
+	
+	<update id="updateReply" parameterType="replyVO">
+		UPDATE REPLY
+		   SET REPLYTEXT  = #{replyText}
+			 , UPDATEDATE = SYSDATE
+		 WHERE RNO        = #{rno}		
+	</update>
+	
+	<update id="deleteReply" parameterType="int">
+		DELETE
+		  FROM REPLY
+		 WHERE RNO = #{rno}		
+	</update>	
+</mapper>
